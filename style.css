@@ -1,10 +1,21 @@
+:root {
+  --color-keyboard-red: rgb(255, 0, 0);
+  --color-keyboard-green: rgb(0, 255, 0);
+  --color-keyboard-blue: rgb(0, 0, 255);
+  --color-keyboard-yellow: rgb(255, 255, 0);
+  --color-keyboard-cyan: rgb(0, 255, 255);
+  --color-keyboard-magenta: rgb(255, 0, 255);
+}
+
+body {
+  background-color: #25273c;
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
 }
 
 
@@ -48,8 +59,30 @@
   background-color: rgb(21, 18, 16);
   color: #fff;
   cursor: pointer;
-  transition: all ease-in 300ms;
+  transition: all ease-in 250ms;
   box-shadow: 4px 4px 3px rgba(21, 18, 16, 0.75);
+  animation: shadow-pulse 10s infinite alternate linear;
+}
+
+@keyframes shadow-pulse{
+  0% {
+    box-shadow: 2px 2px 7px var(--color-keyboard-blue), -1px -1px 7px var(--color-keyboard-blue);
+  }
+  20% {
+    box-shadow: 2px 2px 8px var(--color-keyboard-cyan), -1px -1px 8px var(--color-keyboard-cyan);
+  }
+  40% {
+    box-shadow: 2px 2px 10px var(--color-keyboard-green), -1px -1px 10px var(--color-keyboard-green);
+  }
+  60% {
+    box-shadow: 2px 2px 9px var(--color-keyboard-yellow), -1px -1px 9px var(--color-keyboard-yellow);
+  }
+  80% {
+    box-shadow: 2px 2px 10px var(--color-keyboard-magenta), -1px -1px 10px var(--color-keyboard-magenta);
+  }
+  100% {
+    box-shadow: 2px 2px 10px var(--color-keyboard-red), -1px -1px 10px var(--color-keyboard-red);
+  }
 }
 
 
@@ -58,6 +91,57 @@
 }
 
 
-.keyboard__key:active {
+.keyboard__key:active, .keyboard__key.is-pressed {
   box-shadow: 0px 0px 0px;
+  transform: scale(0.75);
+}
+
+
+.keyboard__key.is-pressed-keep {
+  position: relative;
+  transform: scale(1.1);
+  background-color: rgba(21, 18, 16, 0.95);
+}
+
+
+.keyboard__key.is-pressed-keep::before {
+  content: "";
+  display: block;
+  position: absolute;
+  right: 7px;
+  top: 9px;
+  width: 5px;
+  height: 5px;
+  background-color: #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 7px #fff,
+              0 0 10px #fff,
+              0 0 21px #fff,
+              0 0 42px #0fa,
+              0 0 82px #0fa,
+              0 0 92px #0fa,
+              0 0 102px #0fa,
+              0 0 151px #0fa;
+  transition: all 100ms ease-in-out;
+}
+
+
+/* styles for special keys */
+.keyboard__space {
+  width: 100%;
+  min-width: 400px;
+  max-width: 540px;
+  justify-self: center;
+}
+
+.keyboard__mayus {
+  min-width: 80px;
+  max-width: 120px;
+  justify-self: flex-end;
+}
+
+.keyboard__shift {
+  min-width: 80px;
+  max-width: 120px;
+  justify-self: flex-end;
 }
